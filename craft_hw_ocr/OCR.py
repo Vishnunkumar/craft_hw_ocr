@@ -24,12 +24,12 @@ def load_TrOCRmodel():
   return processor, model
 
 
-def craft_detection(img, link_threshold = None, text_threshold = None):
+def craft_detection(img, link_threshold = '', text_threshold = ''):
   
   """
   Text detection using CRAFT text detector
   """
-  if link_threshold == None & text_threshold == None:
+  if link_threshold == '' & text_threshold == '':
     lt = 0.1
     tt = 0.3
 
