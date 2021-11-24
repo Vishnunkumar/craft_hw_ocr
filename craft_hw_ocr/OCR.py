@@ -5,12 +5,14 @@ from transformers import TrOCRProcessor, VisionEncoderDecoderModel
 from PIL import Image
 from craft_text_detector import Craft
 
+
 def load_image(path):
   
   """
   Loading image 
   """
   return cv2.imread(path)
+
 
 def load_TrOCRmodel():
   
@@ -22,7 +24,7 @@ def load_TrOCRmodel():
   return processor, model
 
 
-def craft_detection(path, link_threshold = None, text_threshold = None):
+def craft_detection(img, link_threshold = None, text_threshold = None):
   
   """
   Text detection using CRAFT text detector
@@ -30,7 +32,6 @@ def craft_detection(path, link_threshold = None, text_threshold = None):
   if link_threshold == None & text_threshold == None:
     lt = 0.1
     tt = 0.3
-    
 
   craft = Craft(output_dir=None, 
                 crop_type="poly",
@@ -60,3 +61,18 @@ def text_recoginition(img, prediction_result, processor, model):
     print('line ' + str(i) + ' has been recoginized')
     
   return prediction_result['boxes'], ('\n').join(text)
+
+
+def visualize(img, prediction_result):
+
+  for i,j in enumerate(prediction_result['boxes']):
+    
+    y1 = int(prediction_result['boxes'][i][0][1])
+    y2 = int(prediction_result['boxes'][i][2][1])
+    
+    x1 = int(prediction_result['boxes'][i][0][0])
+    x2 = int(prediction_result['boxes'][i][2][0])
+    
+    cv2.rectangle(img, (x1, y1), (x2, y2), (255,0,0), 2)
+
+  return Image.fromarray(img)
