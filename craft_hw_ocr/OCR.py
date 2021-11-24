@@ -29,7 +29,7 @@ def craft_detection(img, link_threshold = '', text_threshold = ''):
   """
   Text detection using CRAFT text detector
   """
-  if link_threshold == '' & text_threshold == '':
+  if (link_threshold == '') & (text_threshold == ''):
     lt = 0.1
     tt = 0.3
 
