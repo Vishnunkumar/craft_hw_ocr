@@ -5,6 +5,12 @@ from transformers import TrOCRProcessor, VisionEncoderDecoderModel
 from PIL import Image
 from craft_text_detector import Craft
 
+def load_image(path):
+  
+  """
+  Loading image 
+  """
+  return cv2.imread(path)
 
 def load_TrOCRmodel():
   
@@ -16,16 +22,16 @@ def load_TrOCRmodel():
   return processor, model
 
 
-def craft_detection(path, link_threshold == None, text_threshold == None):
+def craft_detection(path, link_threshold = None, text_threshold = None):
   
   """
   Text detection using CRAFT text detector
   """
-  if link_threshold == None && text_threshold == None:
+  if link_threshold == None & text_threshold == None:
     lt = 0.1
     tt = 0.3
     
-  img = cv2.imread(path)
+
   craft = Craft(output_dir=None, 
                 crop_type="poly",
                 export_extra=False,
