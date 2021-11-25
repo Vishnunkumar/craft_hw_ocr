@@ -3,13 +3,13 @@ from distutils.core import setup
 setup(
   name = 'craft_hw_ocr',         
   packages = ['craft_hw_ocr'],   
-  version = '0.4',      
+  version = '1.0',      
   license='MIT',        
   description = 'Deep learning for document processing',   
   author = 'Vishnu N',                  
   author_email = 'vishnunkumar25@gmail.com',      
   url = 'https://github.com/Vishnunkumar/craft_hw_ocr/',   
-  download_url ='https://github.com/Vishnunkumar/craft_hw_ocr/archive/refs/tags/v-4.tar.gz',    
+  download_url ='https://github.com/Vishnunkumar/craft_hw_ocr/archive/refs/tags/v-1.0.tar.gz',    
   keywords = ['NLP', 'OCR', 'Deep learning', 'Computer Vision'],   
   install_requires = [            
           'transformers',
