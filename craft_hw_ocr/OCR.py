@@ -14,6 +14,28 @@ def load_image(path):
   return cv2.imread(path)
 
 
+def process_image(img):
+  
+  """
+  Process tilted images
+  """
+
+  gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+  th, threshed = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY_INV|cv2.THRESH_OTSU)
+
+  pts = cv2.findNonZero(threshed)
+  ret = cv2.minAreaRect(pts)
+
+  (cx,cy), (w,h), ang = ret
+  if w>h:
+    w,h = h,w
+    ang -= 90
+
+  M = cv2.getRotationMatrix2D((cx,cy), ang, 1.0)
+  rotated = cv2.warpAffine(img, M, (img.shape[1], img.shape[0]))
+
+  return rotated
+
 def load_TrOCRmodel():
   
   """
