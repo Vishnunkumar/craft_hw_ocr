@@ -36,34 +36,34 @@ def process_image(img):
 
   return rotated
 
-def load_TrOCRmodel():
+def load_models():
   
   """
   Loading TrOCR model which has achieved SOTA metrics on IAM handwriting dataset
   """
   processor = TrOCRProcessor.from_pretrained("microsoft/trocr-base-handwritten")
   model = VisionEncoderDecoderModel.from_pretrained("microsoft/trocr-base-handwritten")
-  return processor, model
-
-
-def craft_detection(img):
-  
-  """
-  Text detection using CRAFT text detector
-  """
-
   craft = Craft(output_dir=None, 
                 crop_type="poly",
                 export_extra=False,
                 link_threshold=0.1,
                 text_threshold=0.3,
                 cuda=torch.cuda.is_available())
+  
+  return processor, model, craft
+
+
+def detection(img, craft):
+  
+  """
+  Text detection using CRAFT text detector
+  """
 
   prediction_result = craft.detect_text(img)
   return img, prediction_result
 
 
-def text_recoginition(img, prediction_result, processor, model):
+def recoginition(img, prediction_result, processor, model):
   
   """
   OCR using TrOCR
