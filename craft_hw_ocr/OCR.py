@@ -24,20 +24,17 @@ def load_TrOCRmodel():
   return processor, model
 
 
-def craft_detection(img, link_threshold = '', text_threshold = ''):
+def craft_detection(img):
   
   """
   Text detection using CRAFT text detector
   """
-  if (link_threshold == '') & (text_threshold == ''):
-    lt = 0.1
-    tt = 0.3
 
   craft = Craft(output_dir=None, 
                 crop_type="poly",
                 export_extra=False,
-                link_threshold=lt,
-                text_threshold=tt,
+                link_threshold=0.1,
+                text_threshold=0.3,
                 cuda=torch.cuda.is_available())
 
   prediction_result = craft.detect_text(img)
