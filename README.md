@@ -31,6 +31,12 @@ bboxes, text = OCR.recoginition(img, results, ocr_models[0], ocr_models[1])
 pilImage = OCR.visualize(img, results)
 
 ```
+
+## Online Demo
+
+[Huggingface Space](https://huggingface.co/spaces/vishnun/CRAFT-OCR)
+
+
 ## Credits
 
 [craft-text-detector](https://github.com/fcakyon/craft-text-detector)
