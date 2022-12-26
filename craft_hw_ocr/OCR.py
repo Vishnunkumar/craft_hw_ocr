@@ -74,6 +74,8 @@ def recoginition(img, prediction_result, processor, model):
     x_max = max(int(prediction_result['boxes'][i][0][0]), int(prediction_result['boxes'][i][2][0]))
     y_mim = min(int(prediction_result['boxes'][i][0][1]), int(prediction_result['boxes'][i][2][1]))
     y_max = max(int(prediction_result['boxes'][i][0][1]), int(prediction_result['boxes'][i][2][1]))
+    if x_max == x_mim or y_max == y_mim:
+      continue
     roi = img[y_mim:y_max, x_mim:x_max]
     image = Image.fromarray(roi).convert("RGB")
     pixel_values = processor(image, return_tensors="pt").pixel_values
